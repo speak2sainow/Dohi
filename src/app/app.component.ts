@@ -17,10 +17,10 @@ import './rxjs-operators';
   `]
 })
 export class AppComponent {
-  title = 'Trail App';
+  title = 'Dohi-Trail App';
   
-  lat: number = 63.8257414;
-  lng: number = 20.2636883;
+  lat: number = 59.3307;
+  lng: number = 18.0579;
   zoom: number = 15;
   strokeColor: string = "green";
   polypoints: PlacePosition[] = [];
