@@ -1,65 +1,64 @@
-    <nav class="navbar navbar-inverse">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Project</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
+<br>
+<div class="container-fluid">
+  	<div class="jumbotron">
+    	<h1> {{title}} </h1>
+  	</div>
+  	<!-- <div class="col-md-2">
+		<ul>
+			<li class="list-group-item list-group-item-info" (click)="getTrails()">Get Trails</li>
+		</ul>
+		<ul>
+			<li  *ngFor="let p of paths; let i = index;" (click)="setPolylines(i)" class="list-group-item">{{p.path_name}}</li>
+		</ul>	
+	</div> -->
+	<div class="col-md-2">
+		
+			<p class="list-group-item list-group-item-info" (click)="getTrails()">Get Trails</p>
+			<br>		
+			<p  *ngFor="let p of paths; let i = index;" (click)="setPolylines(i)" class="list-group-item">{{p.path_name}}</p>
+			
+	</div>
+	<div class="col-md-10">
+		<sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
+		  <sebm-google-map-marker *ngFor="let p of places let i = index;" [latitude]="p.place_position.lat" [longitude]="p.place_position.lng">
+		  	<sebm-google-map-info-window [disableAutoPan]="true">
+		  		<span *ngIf="p.place_image"><strong>Place Image:</strong> <img src="{{p.place_image}}" width="60" height="60"><br></span>
+		        <span *ngIf="p.place_radius"><strong>Place Radius:</strong> {{p.place_radius}}<br></span>
+		        <span *ngIf="p.place_position"><strong>Place position:</strong> lat: {{p.place_position.lat}}  lng: {{p.place_position.lng}}<br></span>
+		        <span *ngIf="p.place_info"><strong>Place info:</strong> {{p.place_info}}<br> </span> 
+		        <span *ngIf="p.place_name"><strong>Place Name:</strong> {{p.place_name}}<br></span>        
+		    </sebm-google-map-info-window>
+		  </sebm-google-map-marker>
+		  <sebm-google-map-polyline  (lineMouseOver)="polyLineToggle()" (lineMouseOut)="polyLineToggle()" [strokeColor]="strokeColor">
+		         <sebm-google-map-polyline-point *ngFor="let p of polypoints let i = index;" [latitude]="p.lat" [longitude]="p.lng">
+		         </sebm-google-map-polyline-point>
+		         <sebm-google-map-info-window *ngIf="path" [disableAutoPan]="true" [latitude]="lat" [longitude]="lng" [isOpen]="enablePolyInfoWindow" (infoWindowClose)="enablePolyInfoWindow = false">
+		         	<span *ngIf="path.path_image"><strong>Path image:</strong> <img src="{{path.path_image}}" width="60" height="60"><br></span>
+		         	<span *ngIf="path.path_name"><strong>Path Name:</strong> {{path.path_name}}<br></span>
+			        <span *ngIf="path.path_length"><strong>Path Length:</strong> {{path.path_length}}<br></span>
+			        <span *ngIf="path.path_time"><strong>Path Time:</strong> {{path.path_time}}<br> </span> 
+			        <span *ngIf="path.path_info"><strong>Path Info:</strong> {{path.path_info}}<br></span> 
+		         </sebm-google-map-info-window>
+		     </sebm-google-map-polyline>
+		</sebm-google-map>
+		<br>
+	</div>   
+	
+	<div class="col-md-2">
+	</div> 
+	<div class="col-md-10">
+		<button type="button" class="btn btn-info" (click)="zoom=10">Zoom 10</button>
+		<button type="button" class="btn btn-info" (click)="zoom=14">Zoom 14</button>
+		<button type="button" class="btn btn-info" (click)="zoom=18">Zoom 18</button>
+		<br>
+		<br>
+		<br>
+	</div>  
+</div>
 
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-
-  <div class="container">
-    <div class= "row">
-      <div class = "col-md-12">
-        <div class= "map">
-              <button (click)="changeData()">    Test Get Request  </button><br>
-
-          <sebm-google-map 
-          [latitude]="lat"
-          [longitude]="lng"
-          [zoom]="zoom"
-          [disableDefaultUI]=false
-          [zoomControl]="false"
-          (mapClick)="mapClicked($event)">
-          <sebm-google-map-marker 
-          *ngFor="let m of markers; let i = index"
-          (markerClick)="clickedMarker(m,i)"
-          [latitude]="m.lat"
-          [longitude]="m.lng"
-          [markerDraggable]="m.draggable"
-          (dragEnd)= "markerDragEnd(m,$event)"
-          >
-          <sebm-google-map-info-window>
-          <strong>{{m.name}}</strong>
-          </sebm-google-map-info-window>
-          </sebm-google-map-marker>
-
-          <sebm-google-map-polyline>
-            <sebm-google-map-polyline-point *ngFor="let m of markers; let i = index"
-            [latitude]="m.lat"
-            [longitude]="m.lng"
-            >    
-            </sebm-google-map-polyline-point>
-          </sebm-google-map-polyline>
-
-          </sebm-google-map>
-          <p [innerHTML]="test"></p>
 
 
-          <sebm-google-map [latitude]="lat" [longitude]="lng" [zoom]="zoom">
-          
-        </sebm-google-map>
-        </div>
-      </div>
-    </div>
-  </div><!-- /.container -->
+
+ 
+
 
